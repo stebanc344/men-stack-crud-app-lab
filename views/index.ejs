@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planets</title>
+</head>
+<body>
+  <h1>Planets in Our Solar System</h1>
+
+  
+  <form action="/add-planet" method="POST">
+    <label for="name">Planet Name:</label>
+    <input type="text" name="name" id="name" placeholder="Enter planet name" required><br><br>
+    
+    <label for="type">Planet Type:</label>
+    <input type="text" name="type" id="type" placeholder="Enter planet type" required><br><br>
+
+    <label for="distanceFromSun">Distance from the Sun (in millions of km):</label>
+    <input type="number" name="distanceFromSun" id="distanceFromSun" placeholder="Enter distance from the Sun" required><br><br>
+    
+    <label for="dayLength">Length of Day (in Earth hours):</label>
+    <input type="number" id="dayLength" name="dayLength" placeholder="Enter length of days">
+  
+    <label for="yearLength">Length of Year (in Earth days):</label>
+    <input type="number" id="yearLength" name="yearLength" placeholder="Enter length in years">
+
+    <label for="hasLife">Has Life?</label>
+    <input type="checkbox" name="hasLife" id="hasLife"><br><br>
+
+<button type="submit">Add Planet</button>
+
+  </form>
+  <h2>Planet List:</h2>
+  <ul>
+    <% planets.forEach(planet => { %>
+      <li id="planet-<%= planet._id %>">
+        <strong><%= planet.name %></strong> 
+        (Type: <%= planet.type %>)<br>
+        Distance from Sun: <%= planet.distanceFromSun %> million km<br>
+        Day Length: <%= planet.dayLength %> hours<br>
+        Year Length: <%= planet.yearLength %> days<br>
+        Has Life: <%= planet.hasLife ? "Yes" : "No" %><br>
+        
+       
+        
+        <form action="/planet/<%= planet._id %>?_method=DELETE" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+
+        
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
